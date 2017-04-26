@@ -17,11 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Main extends JFrame{
+public class Main extends JFrame{       			 //we will use JFrame
 
-	int counter=0;
+	int counter=0;									//counter used to decide which player has a turn and for setting a draw
 	JButton[][] button = new JButton[3][3];
-	boolean flag=false;
+	
 	public Main(){
 		
 		
@@ -32,7 +32,7 @@ public class Main extends JFrame{
 		setTitle("Tic Tac Toe by R.Cieæwierz");
 		setLayout(new GridBagLayout());
 		
-		JLabel lb = new JLabel("Rozpoczyna gracz X ",SwingConstants.CENTER);
+		JLabel lb = new JLabel("Player X starts ",SwingConstants.CENTER);
 		lb.setFont(new Font("Arial", Font.PLAIN, 24));
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -40,7 +40,7 @@ public class Main extends JFrame{
 		gbc.fill = GridBagConstraints.BOTH;
 		add(lb, gbc);
 		
-		JButton b = new JButton("Rozpocznij ponownie");
+		JButton b = new JButton("PLAY AGAIN");
 		gbc.gridx = 0;
 		gbc.gridy = 4;
 		gbc.gridwidth =3;
@@ -81,10 +81,10 @@ public class Main extends JFrame{
 							button.setText("X");
 							button.setBackground(Color.RED);
 							button.setActionCommand("X");
-							lb.setText("Tura gracza O ");
+							lb.setText("PLAYER O TURN");
 							if(win("X"))
 								{
-									lb.setText("WYGRA£ GRACZ X ");
+									lb.setText("PLAYER X WINS!");
 									disableAll();
 									b.setVisible(true);
 									counter=0;
@@ -96,10 +96,10 @@ public class Main extends JFrame{
 							button.setText("O");
 							button.setBackground(Color.BLUE);
 							button.setActionCommand("O");
-							lb.setText("Tura gracza X ");
+							lb.setText("PLAYER X TURN");
 							if(win("O")) 
 								{
-									lb.setText("WYGRA£ GRACZ O ");
+									lb.setText("PLAYER O WINS!");
 									disableAll();
 									b.setVisible(true);
 									counter=0;
@@ -110,7 +110,7 @@ public class Main extends JFrame{
 						button.setEnabled(false);
 						if (counter==8)
 							{
-								lb.setText("REMIS");
+								lb.setText("DRAW");
 								b.setVisible(true);
 							}
 						else counter++;				
