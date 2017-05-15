@@ -20,18 +20,20 @@ import javax.swing.SwingConstants;
 public class Main extends JFrame{       			 //we will use JFrame
 
 	int counter=0;									//counter used to decide which player has a turn and for setting a draw
-	JButton[][] button = new JButton[3][3];
+	JButton[][] button = new JButton[3][3];			//tictactoe grid map
 	
-	public Main(){
+	public Main(){									//scene constructor
 		
 		
-		GridBagConstraints gbc = new GridBagConstraints();
+		//setup the window
+		GridBagConstraints gbc = new GridBagConstraints();		
 		setSize(400,400);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Tic Tac Toe by R.Cieæwierz");
 		setLayout(new GridBagLayout());
 		
+		//Adding some labels and buttons
 		JLabel lb = new JLabel("Player X starts ",SwingConstants.CENTER);
 		lb.setFont(new Font("Arial", Font.PLAIN, 24));
 		gbc.gridx = 0;
@@ -39,7 +41,6 @@ public class Main extends JFrame{       			 //we will use JFrame
 		gbc.gridwidth =3;
 		gbc.fill = GridBagConstraints.BOTH;
 		add(lb, gbc);
-		
 		JButton b = new JButton("PLAY AGAIN");
 		gbc.gridx = 0;
 		gbc.gridy = 4;
@@ -48,7 +49,7 @@ public class Main extends JFrame{       			 //we will use JFrame
 		b.setVisible(false);
 		add(b, gbc);
 		
-		b.addActionListener(new ActionListener() {
+		b.addActionListener(new ActionListener() {     //this will perform when you push the button - reseting the game
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -58,7 +59,7 @@ public class Main extends JFrame{       			 //we will use JFrame
 		});
 		
 		
-		
+		//initializing the grid and placing buttons
 		for (int i=0;i<3;i++)
 		{
 			for (int j=0;j<3;j++)
@@ -74,9 +75,10 @@ public class Main extends JFrame{       			 //we will use JFrame
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
+						
 						JButton button = (JButton) e.getSource();
-						if(counter % 2 == 0)
+						//Logic of the game
+						if(counter % 2 == 0) 				//player X turn
 						{
 							button.setText("X");
 							button.setBackground(Color.RED);
@@ -91,7 +93,7 @@ public class Main extends JFrame{       			 //we will use JFrame
 								}
 							
 						}
-						else
+						else								//player O turn
 						{
 							button.setText("O");
 							button.setBackground(Color.BLUE);
@@ -106,8 +108,8 @@ public class Main extends JFrame{       			 //we will use JFrame
 								}
 							
 						}
-						
 						button.setEnabled(false);
+						//game ends when limit of moves ends
 						if (counter==8)
 							{
 								lb.setText("DRAW");
@@ -119,15 +121,14 @@ public class Main extends JFrame{       			 //we will use JFrame
 			}	
 		}
 	}
-	
+	//this function checks rows,colums and diagonals of the matrix and decide if someone has won
 	public boolean win(String x)
 	{
 		for(int i=0;i<3;i++)
 			{
 				if(button[0][i].getActionCommand()==x&button[1][i].getActionCommand()==x&button[2][i].getActionCommand()==x)
 					{
-						return true;
-						
+						return true;		
 					}
 			}
 		for(int i=0;i<3;i++) if(button[i][0].getActionCommand()==x&button[i][1].getActionCommand()==x&button[i][2].getActionCommand()==x) return true;
@@ -136,7 +137,8 @@ public class Main extends JFrame{       			 //we will use JFrame
 		else return false;
 		
 	}
-	
+
+	//this function disables all the buttons on the grid
     public void disableAll() {
     	for(int i=0;i<3;i++)
     	{
@@ -151,9 +153,9 @@ public class Main extends JFrame{       			 //we will use JFrame
 
 	
 	
-	
+//main function just initialize the window
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run(){
